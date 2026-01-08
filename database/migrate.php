@@ -210,7 +210,8 @@ $migrations = [
     },
     
     '003_add_foreign_keys' => function($conn) {
-        // Check and add foreign keys safely
+        // Foreign keys are optional - skip if fails (shared hosting sometimes has issues)
+        // The app will still work without FK constraints, just less strict
         $fks = [
             ['pelatihan', 'fk_pelatihan_lingkup', 'lingkup_id', 'lingkup_pelatihan', 'id'],
             ['pelatihan', 'fk_pelatihan_kategori', 'kategori_id', 'kategori_pelatihan', 'id'],
@@ -222,6 +223,8 @@ $migrations = [
             ['kewajiban_pelatihan', 'fk_kewajiban_pegawai', 'pegawai_id', 'pegawai', 'id'],
             ['kewajiban_pelatihan', 'fk_kewajiban_pelatihan', 'pelatihan_id', 'pelatihan', 'id'],
         ];
+        
+        $successCount = 0;
         
         foreach ($fks as $fk) {
             list($table, $name, $column, $refTable, $refColumn) = $fk;
@@ -236,10 +239,16 @@ $migrations = [
                 $sql = "ALTER TABLE $table ADD CONSTRAINT $name 
                         FOREIGN KEY ($column) REFERENCES $refTable($refColumn) 
                         ON DELETE SET NULL ON UPDATE CASCADE";
-                $conn->query($sql); // Ignore errors for FK
+                if ($conn->query($sql)) {
+                    $successCount++;
+                }
+                // Silently ignore FK errors - app works without them
+            } else {
+                $successCount++;
             }
         }
         
+        // Always return true - FK constraints are optional
         return true;
     },
 ];
