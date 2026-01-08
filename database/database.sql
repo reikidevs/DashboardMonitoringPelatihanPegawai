@@ -1,6 +1,7 @@
 -- Database Monitoring Pelatihan Pegawai
-CREATE DATABASE IF NOT EXISTS monitor_pelatihan_pegawai;
-USE monitor_pelatihan_pegawai;
+-- Untuk shared hosting: buat database manual via cPanel, lalu pilih database tersebut sebelum import
+-- CREATE DATABASE IF NOT EXISTS monitor_pelatihan_pegawai;
+-- USE monitor_pelatihan_pegawai;
 
 -- Tabel Pegawai
 CREATE TABLE pegawai (
