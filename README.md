@@ -56,28 +56,52 @@ Aplikasi web untuk monitoring dan pengelolaan data pelatihan pegawai BPOM dengan
 
 ## 🚀 Cara Instalasi
 
-### 1. Setup Database
+### Local Development
+
+1. **Clone Repository**
 ```bash
-# Import database
-mysql -u root -p < database/database.sql
+git clone https://github.com/reikidevs/DashboardMonitoringPelatihanPegawai.git
+cd DashboardMonitoringPelatihanPegawai
+```
+
+2. **Setup Environment**
+```bash
+cp .env.example .env
+# Edit .env sesuai konfigurasi database lokal
+```
+
+3. **Setup Database**
+```bash
+# Buat database di MySQL
+mysql -u root -p -e "CREATE DATABASE monitor_pelatihan_pegawai"
 
 # Atau jalankan via browser
-http://localhost:3000/database/run_update_database.php
+http://localhost:3000/database/setup.php
 ```
 
-### 2. Konfigurasi Database
-Edit file `config/config.php`:
-```php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'monitor_pelatihan_pegawai');
+4. **Jalankan Aplikasi**
+```bash
+php -S localhost:3000
 ```
 
-### 3. Akses Aplikasi
-```
-http://localhost:3000/
-```
+### Production (Wasmer)
+
+1. **Deploy ke Wasmer** dari GitHub
+2. **Enable Database** (MySQL) di Wasmer dashboard
+3. **Akses Setup Database**: `https://[your-app].wasmer.app/database/setup.php`
+4. **Selesai!**
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `DB_HOST` | Database host | `localhost` |
+| `DB_PORT` | Database port | `3306` |
+| `DB_NAME` | Database name | `monitor_pelatihan_pegawai` |
+| `DB_USERNAME` | Database user | `root` |
+| `DB_PASSWORD` | Database password | `` |
+| `APP_ENV` | Environment (local/production) | `local` |
+| `APP_DEBUG` | Enable debug mode | `true` |
 
 ## ✨ Fitur Utama
 
