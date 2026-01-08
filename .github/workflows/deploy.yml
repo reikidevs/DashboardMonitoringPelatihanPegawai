@@ -33,3 +33,29 @@ jobs:
             **/docs/**
             **/*.md
             **/wasmer.toml
+
+      - name: Run Database Migration
+        if: success()
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X GET \
+            "${{ secrets.APP_URL }}/database/migrate.php?token=${{ secrets.MIGRATE_TOKEN }}")
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "Response: $body"
+          echo "HTTP Code: $http_code"
+          
+          if [ "$http_code" != "200" ]; then
+            echo "Migration failed with HTTP $http_code"
+            exit 1
+          fi
+          
+          # Check if migration was successful
+          success=$(echo "$body" | jq -r '.success // false')
+          if [ "$success" != "true" ]; then
+            echo "Migration reported failure"
+            exit 1
+          fi
+          
+          echo "✅ Migration completed successfully"
