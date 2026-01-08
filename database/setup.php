@@ -5,7 +5,28 @@
  * URL: /database/setup.php
  */
 
-require_once '../config/config.php';
+// Load environment variables tanpa koneksi database
+$envFile = dirname(__DIR__) . '/.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '#') === 0) continue;
+        if (strpos($line, '=') === false) continue;
+        list($key, $value) = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value);
+        if (!getenv($key)) {
+            putenv("$key=$value");
+        }
+    }
+}
+
+// Database Configuration
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_PORT', getenv('DB_PORT') ?: '3306');
+define('DB_NAME', getenv('DB_NAME') ?: 'monitor_pelatihan_pegawai');
+define('DB_USER', getenv('DB_USERNAME') ?: 'root');
+define('DB_PASS', getenv('DB_PASSWORD') ?: '');
 
 // Security check - hanya bisa dijalankan sekali atau dengan token
 $setupToken = getenv('SETUP_TOKEN') ?: 'setup123';
