@@ -46,7 +46,7 @@ $isFirstSetup = $tableCheck->num_rows === 0;
 if (!$isFirstSetup && $providedToken !== $setupToken) {
     die("<h2>⚠️ Database sudah di-setup</h2>
          <p>Jika ingin menjalankan ulang, tambahkan parameter: <code>?token=$setupToken</code></p>
-         <p><a href='../index.php'>← Kembali ke Dashboard</a></p>");
+         <p><a href='../'>← Kembali ke Dashboard</a></p>");
 }
 
 echo "<h1>🔧 Database Setup</h1>";
@@ -209,7 +209,7 @@ echo "<p style='color:green;'>✅ Data settings</p>";
 echo "<hr>";
 echo "<h2 style='color:green;'>🎉 Setup Selesai!</h2>";
 echo "<p>Berhasil: $success | Gagal: $failed</p>";
-echo "<p><a href='../index.php' style='display:inline-block; padding:10px 20px; background:#005BAC; color:white; text-decoration:none; border-radius:5px;'>Buka Dashboard →</a></p>";
+echo "<p><a href='../' style='display:inline-block; padding:10px 20px; background:#005BAC; color:white; text-decoration:none; border-radius:5px;'>Buka Dashboard →</a></p>";
 
 $conn->close();
 ?>

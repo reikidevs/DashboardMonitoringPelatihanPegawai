@@ -55,7 +55,7 @@ $showForm = (isset($_GET['action']) && $_GET['action'] == 'add') || $editData;
         <p class="text-xs text-gray-500 mb-1">Data Master Pegawai</p>
         <h1 class="text-xl font-bold text-gray-800" style="color:#1a365d;">DATABASE PEGAWAI</h1>
     </div>
-    <a href="../index.php" class="inline-flex items-center gap-1 text-sm px-3 py-1.5 rounded border border-gray-300 hover:bg-gray-50 text-gray-600">
+    <a href="../" class="inline-flex items-center gap-1 text-sm px-3 py-1.5 rounded border border-gray-300 hover:bg-gray-50 text-gray-600">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         KEMBALI
     </a>

@@ -128,7 +128,7 @@ echo "<h3 style='color:green;'>✅ Update Database Selesai!</h3>";
 echo "<p>Sekarang Anda bisa menggunakan fitur sinkronisasi Google Sheets dan Auto-Sync.</p>";
 echo "<p><a href='../pages/sync_gsheet.php' style='display:inline-block; padding:10px 20px; background:#059669; color:white; text-decoration:none; border-radius:5px;'>Buka Halaman Sync →</a></p>";
 echo "<p><a href='../pages/settings_sync.php' style='display:inline-block; padding:10px 20px; background:#6366f1; color:white; text-decoration:none; border-radius:5px; margin-top:10px;'>Pengaturan Auto-Sync →</a></p>";
-echo "<p><a href='../index.php' style='display:inline-block; padding:10px 20px; background:#005BAC; color:white; text-decoration:none; border-radius:5px; margin-top:10px;'>Kembali ke Beranda →</a></p>";
+echo "<p><a href='../' style='display:inline-block; padding:10px 20px; background:#005BAC; color:white; text-decoration:none; border-radius:5px; margin-top:10px;'>Kembali ke Beranda →</a></p>";
 
 $conn->close();
 ?>

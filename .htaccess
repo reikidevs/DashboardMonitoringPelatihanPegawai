@@ -1,0 +1,32 @@
+# Enable URL Rewriting
+RewriteEngine On
+
+# Set base directory
+RewriteBase /
+
+# Remove index.php from URL
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.php\s [NC]
+RewriteRule ^index\.php$ / [R=301,L]
+
+# If the request is not a file or directory, serve index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^$ index.php [L]
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^\.env$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
