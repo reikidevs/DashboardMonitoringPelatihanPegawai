@@ -1,0 +1,16 @@
+[package]
+name = "dashboardmonitoringpelatihanpegawai"
+version = "1.0.0"
+description = "Sistem Monitoring Pelatihan Pegawai BPOM"
+
+[dependencies]
+"php/php" = "8.2"
+
+[[module]]
+name = "app"
+source = "."
+
+[[command]]
+name = "run"
+module = "app"
+runner = "https://webc.org/runner/wasi"
