@@ -1,0 +1,13 @@
+/* Custom styles - Tailwind CSS is loaded via CDN */
+/* This file is kept for any additional custom styles if needed */
+
+/* Print Styles */
+@media print {
+    nav, .btn, form, .action-buttons, .filter-section { 
+        display: none !important; 
+    }
+    .bg-white { 
+        box-shadow: none !important; 
+        border: 1px solid #ddd !important; 
+    }
+}
