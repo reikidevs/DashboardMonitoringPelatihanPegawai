@@ -1,0 +1,40 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+error_log
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Environment
+.env
+.env.local
+
+# Dependencies (jika ada)
+vendor/
+node_modules/
+
+# Cache
+cache/
+*.cache
+
+# Uploads (jika ada folder upload)
+uploads/*
+!uploads/.gitkeep
+
+# Reference files (file Excel referensi klien)
+reference/*.xlsx
+
+# Sensitive config (uncomment jika perlu)
+# config/config.php
