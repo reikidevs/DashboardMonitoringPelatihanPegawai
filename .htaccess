@@ -8,6 +8,12 @@ RewriteBase /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.php\s [NC]
 RewriteRule ^index\.php$ / [R=301,L]
 
+# Rewrite root-level .php requests to pages/ folder
+# Example: /kalender.php -> /pages/kalender.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(pegawai|pegawai_detail|pelatihan|jadwal|kalender|monitoring|laporan|realisasi|kewajiban|sync_gsheet|settings_sync|import_gsheet)\.php$ pages/$1.php [L]
+
 # If the request is not a file or directory, serve index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
