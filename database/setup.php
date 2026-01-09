@@ -187,7 +187,7 @@ echo "<p style='color:green;'>✅ Data kategori_pelatihan</p>";
 // Lingkup Pelatihan
 $conn->query("INSERT IGNORE INTO lingkup_pelatihan (id, nama) VALUES 
     (1, 'TI'), (2, 'Komoditi Obat'), (3, 'Komoditi Pangan'), 
-    (4, 'Komoditi OBA-SK'), (5, 'Komoditi Kosmetik'), (6, 'Keuangan')");
+    (4, 'Komoditi OBA-SK'), (5, 'Komoditi Kosmetik'), (6, 'Keuangan'), (7, 'Lainnya')");
 echo "<p style='color:green;'>✅ Data lingkup_pelatihan</p>";
 
 // Default Settings

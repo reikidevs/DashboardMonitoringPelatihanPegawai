@@ -209,7 +209,54 @@ $migrations = [
         return true;
     },
     
-    '003_add_foreign_keys' => function($conn) {
+    '003_add_lingkup_lainnya' => function($conn) {
+        // Tambah opsi "Lainnya" ke lingkup pelatihan
+        $conn->query("INSERT IGNORE INTO lingkup_pelatihan (id, nama) VALUES (7, 'Lainnya')");
+        return true;
+    },
+    
+    '004_add_jadwal_monitoring_sync' => function($conn) {
+        // Tambah kolom jadwal_id ke monitoring_pelatihan untuk tracking sumber data
+        $checkCol = $conn->query("SHOW COLUMNS FROM monitoring_pelatihan LIKE 'jadwal_id'");
+        if ($checkCol->num_rows === 0) {
+            $conn->query("ALTER TABLE monitoring_pelatihan ADD COLUMN jadwal_id INT NULL AFTER pelatihan_id");
+            $conn->query("ALTER TABLE monitoring_pelatihan ADD INDEX idx_jadwal (jadwal_id)");
+        }
+        return true;
+    },
+    
+    '005_add_monitoring_dates_and_file' => function($conn) {
+        // Tambah kolom tanggal_mulai, tanggal_selesai, dan file_sertifikat
+        $checkCol = $conn->query("SHOW COLUMNS FROM monitoring_pelatihan LIKE 'tanggal_mulai'");
+        if ($checkCol->num_rows === 0) {
+            $conn->query("ALTER TABLE monitoring_pelatihan ADD COLUMN tanggal_mulai DATE NULL AFTER pelaksanaan");
+            $conn->query("ALTER TABLE monitoring_pelatihan ADD COLUMN tanggal_selesai DATE NULL AFTER tanggal_mulai");
+        }
+        
+        $checkFile = $conn->query("SHOW COLUMNS FROM monitoring_pelatihan LIKE 'file_sertifikat'");
+        if ($checkFile->num_rows === 0) {
+            $conn->query("ALTER TABLE monitoring_pelatihan ADD COLUMN file_sertifikat VARCHAR(255) NULL AFTER no_sertifikat");
+        }
+        return true;
+    },
+    
+    '006_create_users_table' => function($conn) {
+        $conn->query("CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            nama VARCHAR(100),
+            role ENUM('admin', 'guest') DEFAULT 'guest',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+        
+        // Insert default admin (password: admin123)
+        $hash = password_hash('admin123', PASSWORD_DEFAULT);
+        $conn->query("INSERT IGNORE INTO users (id, username, password, nama, role) VALUES (1, 'admin', '$hash', 'Administrator', 'admin')");
+        return true;
+    },
+    
+    '007_add_foreign_keys' => function($conn) {
         // Foreign keys are optional - skip if fails (shared hosting sometimes has issues)
         // The app will still work without FK constraints, just less strict
         $fks = [

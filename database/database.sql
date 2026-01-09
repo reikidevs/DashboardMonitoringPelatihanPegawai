@@ -82,7 +82,7 @@ INSERT INTO kategori_pelatihan (nama) VALUES
 
 -- Insert Data Lingkup
 INSERT INTO lingkup_pelatihan (nama) VALUES 
-('TI'), ('Komoditi Obat'), ('Komoditi Pangan'), ('Komoditi OBA-SK'), ('Komoditi Kosmetik'), ('Keuangan');
+('TI'), ('Komoditi Obat'), ('Komoditi Pangan'), ('Komoditi OBA-SK'), ('Komoditi Kosmetik'), ('Keuangan'), ('Lainnya');
 
 -- Sample Data Pegawai
 INSERT INTO pegawai (nama, nip, jabatan, email, phone) VALUES

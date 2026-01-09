@@ -103,3 +103,66 @@ function dd($data) {
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+/**
+ * Authentication Functions
+ */
+
+// Halaman yang bisa diakses guest (tanpa login)
+define('GUEST_PAGES', ['jadwal', 'monitoring', 'kalender', 'index']);
+
+function isLoggedIn() {
+    return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+}
+
+function isAdmin() {
+    return isLoggedIn() && ($_SESSION['user_role'] ?? '') === 'admin';
+}
+
+function getCurrentUser() {
+    if (!isLoggedIn()) return null;
+    return [
+        'id' => $_SESSION['user_id'],
+        'username' => $_SESSION['username'],
+        'nama' => $_SESSION['user_nama'],
+        'role' => $_SESSION['user_role']
+    ];
+}
+
+function login($username, $password) {
+    $conn = getConnection();
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['user_nama'] = $user['nama'];
+        $_SESSION['user_role'] = $user['role'];
+        return true;
+    }
+    return false;
+}
+
+function logout() {
+    session_destroy();
+    session_start();
+}
+
+function requireAdmin($redirectTo = '../pages/login.php') {
+    if (!isAdmin()) {
+        alert('Anda harus login sebagai admin untuk mengakses halaman ini', 'danger');
+        redirect($redirectTo);
+    }
+}
+
+function canAccessPage($pageName) {
+    // Admin bisa akses semua
+    if (isAdmin()) return true;
+    
+    // Guest hanya bisa akses halaman tertentu
+    return in_array($pageName, GUEST_PAGES);
+}
