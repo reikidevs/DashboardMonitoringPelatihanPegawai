@@ -77,10 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         </div>
-        
-        <p class="text-center text-xs text-gray-500 mt-4">
-            Default: admin / admin123
-        </p>
     </div>
 </body>
 </html>
