@@ -283,7 +283,7 @@ $lastSync = $settings['last_sync'] ?? null;
                     Preview Data
                 </button>
             </form>
-            <a href="../api/test_gsheet_connection.php" target="_blank" class="block w-full px-4 py-2 text-sm text-center border border-blue-300 rounded hover:bg-blue-50 text-blue-600">
+            <a href="test_gsheet_connection.php" target="_blank" class="block w-full px-4 py-2 text-sm text-center border border-blue-300 rounded hover:bg-blue-50 text-blue-600">
                 Test Koneksi
             </a>
         </div>

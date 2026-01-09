@@ -316,7 +316,7 @@ function autoSync() {
     notification.classList.remove('hidden');
     message.textContent = 'Memeriksa data baru dari Google Sheets...';
     
-    fetch('api/auto_sync.php')
+    fetch('auto_sync.php')
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -324,7 +324,7 @@ function autoSync() {
                     // Ada data baru
                     notification.classList.remove('bg-blue-50', 'border-blue-200', 'text-blue-700');
                     notification.classList.add('bg-green-50', 'border-green-200', 'text-green-700');
-                    message.innerHTML = `<strong>✓ ${data.message}</strong> <a href="pages/monitoring.php" class="underline ml-2">Lihat Data →</a>`;
+                    message.innerHTML = `<strong>✓ ${data.message}</strong> <a href="monitoring.php" class="underline ml-2">Lihat Data →</a>`;
                     
                     // Reload page after 3 seconds to show new data
                     setTimeout(() => {

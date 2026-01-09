@@ -14,6 +14,12 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(pegawai|pegawai_detail|pelatihan|jadwal|kalender|monitoring|laporan|realisasi|kewajiban|sync_gsheet|settings_sync|import_gsheet)\.php$ pages/$1.php [L]
 
+# Rewrite root-level API .php requests to api/ folder
+# Example: /export.php -> /api/export.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(export|auto_sync|template|test_gsheet_connection)\.php$ api/$1.php [L]
+
 # If the request is not a file or directory, serve index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

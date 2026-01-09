@@ -144,5 +144,5 @@ if ($csvData === false) {
 }
 
 echo "<hr>";
-echo "<p><a href='../pages/sync_gsheet.php'>← Kembali ke Halaman Sync</a></p>";
+echo "<p><a href='../sync_gsheet.php'>← Kembali ke Halaman Sync</a></p>";
 ?>

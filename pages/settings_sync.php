@@ -177,7 +177,7 @@ $lastSync = $lastSyncResult && $lastSyncResult->num_rows > 0 ? $lastSyncResult->
                 <a href="sync_gsheet.php" class="block w-full px-4 py-2 text-sm text-center border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition">
                     Sync Manual
                 </a>
-                <a href="../api/test_gsheet_connection.php" target="_blank" class="block w-full px-4 py-2 text-sm text-center border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition">
+                <a href="test_gsheet_connection.php" target="_blank" class="block w-full px-4 py-2 text-sm text-center border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition">
                     Test Koneksi
                 </a>
                 <a href="monitoring.php" class="block w-full px-4 py-2 text-sm text-center border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition">
